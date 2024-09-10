@@ -1,0 +1,16 @@
+services:
+  docs:
+    image: yd_files_local_docs
+    container_name: yd_files_local_docs
+    build:
+      context: yd_files
+      dockerfile: compose/local/docs/Dockerfile
+    env_file:
+      - .envs/.local/.django
+    volumes:
+      - ./docs:/docs:z
+      - ./config:/app/config:z
+      - ./yd_files:/app/yd_files:z
+    ports:
+      - '9000:9000'
+    command: /start-docs
