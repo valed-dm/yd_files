@@ -1,3 +1,32 @@
 {% extends "base.html" %}
 
+{% block sdk-suggest %}
+  <script defer src="https://yastatic.net/s3/passport-sdk/autofill/v1/sdk-suggest-with-polyfills-latest.js"></script>
+{% endblock sdk-suggest %}
 
+{% block content %}
+  <p>Авторизуйтесь для доступа к функциям приложения</p>
+{% endblock content %}
+
+{% block YaAuthSuggest %}
+  <script>
+    window.onload = function () {
+      if (window.YaAuthSuggest) {
+        window.YaAuthSuggest.init(
+          {
+            client_id: "858474eeeb304f108b5965ffc88ee663",
+            response_type: "token",
+            redirect_uri: "https://oauth.yandex.ru/verification_code"
+          },
+          "https://oauth.yandex.ru",
+          {view: "default"}
+        )
+          .then(({handler}) => handler())
+          .then(data => console.log('Сообщение с токеном', data))
+          .catch(error => console.log('Обработка ошибки', error));
+      } else {
+        console.log("YaAuthSuggest is not available");
+      }
+    };
+  </script>
+{% endblock YaAuthSuggest %}

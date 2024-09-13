@@ -21,7 +21,7 @@ urlpatterns = [
     path("users/", include("yd_files.users.urls", namespace="users")),
     path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
-    # ...
+    path("yafiles/", include("yd_files.yafiles.urls", namespace="yafiles")),
     # Media files
     *static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
 ]
